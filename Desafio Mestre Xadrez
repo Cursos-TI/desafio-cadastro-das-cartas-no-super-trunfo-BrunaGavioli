@@ -1,0 +1,87 @@
+#include <stdio.h>
+
+// Número de casas para movimentação
+const int casasTorre = 3;
+const int casasBispo = 3;
+const int casasRainha = 2;
+
+// ------------------ TORRE ------------------
+// Movimento recursivo para cima
+void moverTorreCima(int casas) {
+    if (casas == 0) return;
+    printf("Cima\n");
+    moverTorreCima(casas - 1);
+}
+
+// Movimento recursivo para direita
+void moverTorreDireita(int casas) {
+    if (casas == 0) return;
+    printf("Direita\n");
+    moverTorreDireita(casas - 1);
+}
+
+// ------------------ BISPO ------------------
+// Movimento recursivo diagonal (cima-direita)
+void moverBispoDiagonal(int casas) {
+    if (casas == 0) return;
+    printf("Cima\n");
+    printf("Direita\n");
+    moverBispoDiagonal(casas - 1);
+}
+
+// Movimento com loops aninhados (cima-direita)
+void moverBispoComLoops(int casas) {
+    for (int i = 0; i < casas; i++) {
+        for (int j = 0; j < 1; j++) {
+            printf("Direita\n");
+        }
+        printf("Cima\n");
+    }
+}
+
+// ------------------ RAINHA ------------------
+// Movimento recursivo: cima e direita
+void moverRainha(int casas) {
+    if (casas == 0) return;
+    printf("Cima\n");
+    printf("Direita\n");
+    moverRainha(casas - 1);
+}
+
+// ------------------ CAVALO ------------------
+// Movimento em "L": duas casas para cima e uma para a direita
+void moverCavalo() {
+    const int maxLinhas = 8;
+    const int maxColunas = 8;
+
+    for (int linha = 2; linha < maxLinhas; linha++) {
+        for (int coluna = 1; coluna < maxColunas; coluna++) {
+            if ((linha % 2 == 0 && coluna % 2 == 1) || (linha + coluna) % 3 == 0) {
+                printf("Cavalo move: 2 para cima, 1 para direita\n");
+                continue;
+            }
+            if (linha + coluna > 10) break;
+        }
+    }
+}
+
+// ------------------ MAIN ------------------
+int main() {
+    printf("=== Movimento da Torre ===\n");
+    moverTorreCima(casasTorre);
+    moverTorreDireita(casasTorre);
+
+    printf("\n=== Movimento do Bispo (Recursivo) ===\n");
+    moverBispoDiagonal(casasBispo);
+
+    printf("\n=== Movimento do Bispo (Loops Aninhados) ===\n");
+    moverBispoComLoops(casasBispo);
+
+    printf("\n=== Movimento da Rainha ===\n");
+    moverRainha(casasRainha);
+
+    printf("\n=== Movimento do Cavalo ===\n");
+    moverCavalo();
+
+    return 0;
+}
